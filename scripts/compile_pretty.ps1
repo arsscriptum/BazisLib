@@ -109,8 +109,16 @@ Function Show-MyPopup{
 }
 
 function Out-Banner {  # NOEXPORT
-    Write-Host "`ncompile.exe - compilation tool" -f Blue
-    Write-Host "Copyright 2020 - Guillaume Plante`n" -f Gray
+    Write-Host "`n𝓬𝓸𝓶𝓹𝓲𝓵𝓮.𝓮𝔁𝓮 - 𝓒𝓸𝓶𝓹𝓲𝓵𝓪𝓽𝓲𝓸𝓷 𝓣𝓸𝓸𝓵" -f Blue
+    Write-Host "𝒞ℴ𝓅𝓎𝓇𝒾ℊ𝒽𝓉 (𝒞) 2000-2021 𝒢𝓊𝒾𝓁𝓁𝒶𝓊𝓂ℯ 𝒫𝓁𝒶𝓃𝓉ℯ`n" -f Gray
+}
+function Out-Usage{  # NOEXPORT
+    Write-Host "𝓾𝓼𝓪𝓰𝓮: 𝓬𝓸𝓶𝓹𝓲𝓵𝓮.𝓮𝔁𝓮  [𝓾𝓻𝓵] <-𝓹 𝓭𝓮𝓼𝓽𝓲𝓷𝓪𝓽𝓲𝓸𝓷 𝓹𝓪𝓽𝓱> <-𝓶 𝓭𝓸𝔀𝓷𝓵𝓸𝓪𝓭 𝓶𝓸𝓭𝓮> <-𝓪>`n" -f Gray
+    Write-Host "𝒯𝒽ℯ 𝒻ℴ𝓁𝓁ℴ𝓌𝒾𝓃ℊ 𝒸𝓂𝒹𝓁𝒾𝓃ℯ ℴ𝓅𝓉𝒾ℴ𝓃𝓈 𝒶𝓇ℯ 𝒶𝓋𝒶𝒾𝓁𝒶𝒷𝓁ℯ:" -f Gray
+    Write-Host "`t-𝒽ℯ𝓁𝓅            𝓈𝒽ℴ𝓌 𝒽ℯ𝓁𝓅" -f Gray
+    Write-Host "`t-ℒ𝒾𝒷𝒫𝒶𝓉𝒽         𝓈ℴ𝓊𝓇𝒸ℯ 𝓁ℴ𝒸𝒶𝓉𝒾ℴ𝓃 ℴ𝒻 𝓉𝒽ℯ 𝒻𝒾𝓁ℯ𝓈 𝓉𝒽𝒶𝓉 𝓎ℴ𝓊 𝓌𝒶𝓃𝓉 𝓉ℴ 𝓉𝓇𝒶𝓃𝓈𝒻ℯ𝓇" -f Gray
+    Write-Host "`t-𝒟ℯ𝓅𝓁ℴ𝓎𝒫𝒶𝓉𝒽     𝒹ℯ𝓈𝓉𝒾𝓃𝒶𝓉𝒾ℴ𝓃 𝓁ℴ𝒸𝒶𝓉𝒾ℴ𝓃 ℴ𝒻 𝓉𝒽ℯ 𝒻𝒾𝓁ℯ𝓈 𝓉𝒽𝒶𝓉 𝓎ℴ𝓊 𝓌𝒶𝓃𝓉 𝓉ℴ 𝓉𝓇𝒶𝓃𝓈𝒻ℯ𝓇." -f Gray 
+    Write-Host "`t-𝒫𝓁𝒶𝓉𝒻ℴ𝓇𝓂       𝒷𝓊𝒾𝓁𝒹 𝓅𝓁𝒶𝓉ℴ𝓇𝓂" -f Gray
 }
 
 
@@ -276,8 +284,8 @@ param(
      $JobName = "$basename-$op"
     $jobby = Start-Job -Name $JobName -ScriptBlock $buildJob -ArgumentList ($msbuild,$project,$op,$config)
     $Building  = $True
-    [string]$rndstr =  Get-Random -Maximum 9999 -Minimum 1
-    
+    [string]$rndstr = (New-Guid).Guid
+    $rndstr=$rndstr.substring($rndstr.Length-4)
     $TmpProgressFile = "$ENV:Temp\$JobName_$rndstr.txt"
 
     if($Asynchronous){ 
@@ -332,16 +340,16 @@ function StartMsProcess([string]$cfg){
     if($cfg -imatch 'Debug'){
         $color = 'DarkYellow'
     }
-    Write-Host "Building project core $cfg" -f $color
+    Write-Host "ℬ𝓊𝒾𝓁𝒹𝒾𝓃ℊ 𝓅𝓇ℴ𝒿ℯ𝒸𝓉 𝒸ℴ𝓇ℯ" -f $color
 
     $totalMs =  StartBuild "$bzscore" "$cfg"
-     $log =  "completed in {0:f2} seconds" -f ($totalMs / 1000)
+     $log =  "𝓬𝓸𝓶𝓹𝓵𝓮𝓽𝓮𝓭 𝓲𝓷 {0:f2} 𝓼𝓮𝓬𝓸𝓷𝓭𝓼" -f ($totalMs / 1000)
     Write-HOst -f Gray "$log"
-     Write-Host "Building project hlp $cfg" -f $color
+    Write-Host "ℬ𝓊𝒾𝓁𝒹𝒾𝓃ℊ 𝓅𝓇ℴ𝒿ℯ𝒸𝓉 𝒽𝓁𝓅"  -f $color
 
 
     $totalMs =  StartBuild "$bzshlp" "$cfg"
-    $log =  "completed in {0:f2} seconds" -f ($totalMs / 1000)
+    $log =  "𝓬𝓸𝓶𝓹𝓵𝓮𝓽𝓮𝓭 𝓲𝓷 {0:f2} 𝓼𝓮𝓬𝓸𝓷𝓭𝓼" -f ($totalMs / 1000)
     Write-HOst -f Gray "$log"
 
  
