@@ -19,7 +19,7 @@ using namespace BazisLib;
 std::list<String> BazisLib::EnumerateDevicesByInterface(const GUID *pguidInterfaceType, PDEVICE_SN_FILTER Filter, void *pContext)
 {
 	std::list<String> devices;
-	if (!pguidInterfaceType)
+	/*if (!pguidInterfaceType)
 		return devices;
 	DeviceInformationSet devs = DeviceInformationSet::GetLocalDevices(pguidInterfaceType);
 	for (DeviceInformationSet::iterator it = devs.begin(); it != devs.end(); it++)
@@ -38,7 +38,7 @@ std::list<String> BazisLib::EnumerateDevicesByInterface(const GUID *pguidInterfa
 
 		if (!bSkip && it.GetDevicePath())
 			devices.push_back(it.GetDevicePath());
-	}
+	}*/
 	return devices;
 }
 
@@ -46,11 +46,11 @@ std::list<String> BazisLib::EnumerateDevicesByHardwareID(const String &ID)
 {
 	std::list<String> devices;
 	DeviceInformationSet devs = DeviceInformationSet::GetLocalDevices();
-	for (DeviceInformationSet::iterator it = devs.begin(); it != devs.end(); it++)
+	/*for (DeviceInformationSet::iterator it = devs.begin(); it != devs.end(); it++)
 	{
 		if (it.GetDeviceRegistryProperty(SPDRP_HARDWAREID) == ID)
 			devices.push_back(it.GetInstanceId());
-	}
+	}*/
 	return devices;
 }
 
