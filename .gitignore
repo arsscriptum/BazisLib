@@ -45,3 +45,8 @@ CodeDB
 /support/strgen/Release
 *.opensdf
 
+**/___temp_compilation_files
+bzscore/___temp_compilation_files/**
+bzshlp/___temp_compilation_files/**
+___temp_compilation_files/**
+___temp_compilation_files
